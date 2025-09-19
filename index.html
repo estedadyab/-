@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>استعدادیاب | کشف مسیر شغلی مناسب شما</title>
+    <meta name="description" content="با آزمون تخصصی استعدادیاب، مسیر شغلی خود را کشف کنید و با نقشه راه شخصی‌سازی شده به موفقیت برسید">
+    <meta name="keywords" content="استعدادیاب, آزمون شغلی, کشف استعداد, انتخاب شغل, مسیر شغلی, آزمون آنلاین">
+    <meta name="author" content="Estedadyab">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/vazir@5.0.1/500.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --dark-bg: #121212;
+            --darker-bg: #0a0a0a;
+            --gold: #ffd700;
+            --light-gold: #ffed4e;
+            --dark-gold: #d4af37;
+            --white: #ffffff;
+            --light-gray: #b0b0b0;
+            --dark-gray: #2a2a2a;
+            --accent-blue: #4a8cff;
+            --accent-green: #4caf50;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Vazir, 'Rajdhani', sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: rgba(10, 10, 10, 0.9);
+            box-shadow: 0 2px 20px rgba(255, 215, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0;
+            position: relative;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 2.2rem;
+            color: var(--gold);
+            text-decoration: none;
+            position: relative;
+        }
+        
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%23121212" width="100" height="100"/><path fill="%230a0a0a" d="M0 0L100 100M100 0L0 100" stroke="%23d4af37" stroke-width="0.5"/></svg>');
+            color: var(--white);
+            padding: 150px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 10%, var(--dark-bg) 80%);
+            opacity: 0.8;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 25px;
+            color: var(--gold);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin: 0 auto 40px;
+            color: var(--light-gray);
+            animation: fadeInUp 1.2s ease;
+            line-height: 1.8;
+        }
+        
+        .btn {
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s;
+            border: none;
+            font-size: 1.2rem;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1.4s ease;
+        }
+        
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--dark-gold) 100%);
+            color: var(--dark-bg);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+        }
+        
+        .btn-gold:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.6);
+        }
+        
+        .btn-gold::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(30deg);
+            transition: all 0.5s;
+        }
+        
+        .btn-gold:hover::after {
+            transform: rotate(30deg) translate(10%, 10%);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 120px 0;
+            background-color: var(--darker-bg);
+            position: relative;
+        }
+        
+        .features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%23121212" width="100" height="100"/><path fill="%230a0a0a" d="M0 0L100 100M100 0L0 100" stroke="%23d4af37" stroke-width="0.2"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.8rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 100px;
+            height: 4px;
+            background: var(--gold);
+        }
+        
+        .section-title p {
+            color: var(--light-gray);
+            max-width: 700px;
+            margin: 40px auto 0;
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .feature-card {
+            background: rgba(26, 26, 26, 0.7);
+            border-radius: 15px;
+            padding: 40px 30px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(212, 175, 55, 0.05), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+        
+        .feature-icon {
+            width: 90px;
+            height: 90px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            font-size: 40px;
+            color: var(--white);
+            position: relative;
+            filter: contrast(0.8);
+        }
+        
+        .feature-icon::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--white);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+            opacity: 0.3;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--gold);
+            text-align: center;
+        }
+        
+        .feature-card p {
+            color: var(--light-gray);
+            line-height: 1.8;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--darker-bg);
+            color: var(--light-gray);
+            padding: 80px 0 40px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: var(--gold);
+        }
+        
+        .footer-column p {
+            line-height: 1.8;
+            max-width: 300px;
+            font-size: 1.1rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-column ul li a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+        
+        .footer-column ul li a i {
+            margin-left: 10px;
+            color: var(--gold);
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--gold);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 1rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Quiz Page Styles */
+        .quiz-container {
+            display: none;
+            padding: 80px 0;
+            background: var(--dark-bg);
+            min-height: 100vh;
+        }
+        
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .quiz-header h2 {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .quiz-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 60px;
+            height: 3px;
+            background: var(--gold);
+        }
+        
+        .quiz-header p {
+            color: var(--light-gray);
+            max-width: 600px;
+            margin: 30px auto 0;
+            font-size: 1.2rem;
+        }
+        
+        .progress-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            background: var(--dark-gray);
+            height: 12px;
+            border-radius: 6px;
+            overflow: hidden;
+            animation: fadeInUp 1.2s ease;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--dark-gold), var(--gold));
+            border-radius: 6px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .question-card {
+            background: rgba(26, 26, 26, 0.8);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            animation: fadeInUp 1.4s ease;
+        }
+        
+        .question-text {
+            font-size: 1.6rem;
+            margin-bottom: 30px;
+            color: var(--gold);
+            text-align: center;
+            line-height: 1.6;
+        }
+        
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        .option {
+            background: rgba(42, 42, 42, 0.8);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        
+        .option:hover {
+            background: rgba(212, 175, 55, 0.1);
+            border-color: var(--gold);
+            transform: translateX(-5px);
+        }
+        
+        .option input {
+            margin-left: 15px;
+        }
+        
+        .option label {
+            cursor: pointer;
+            flex: 1;
+            font-size: 1.1rem;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+        
+        /* Results Page Styles */
+        .results-container {
+            display: none;
+            padding: 80px 0;
+            background: var(--dark-bg);
+            min-height: 100vh;
+        }
+        
+        .results-header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .results-header h2 {
+            font-size: 2.8rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .results-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 80px;
+            height: 3px;
+            background: var(--gold);
+        }
+        
+        .results-header p {
+            color: var(--light-gray);
+            max-width: 600px;
+            margin: 30px auto 0;
+            font-size: 1.2rem;
+        }
+        
+        .career-match {
+            background: rgba(26, 26, 26, 0.8);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+            max-width: 900px;
+            margin: 0 auto 40px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            animation: fadeInUp 1.2s ease;
+        }
+        
+        .career-match h3 {
+            color: var(--gold);
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 2rem;
+            position: relative;
+        }
+        
+        .career-match h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 50px;
+            height: 2px;
+            background: var(--gold);
+        }
+        
+        .match-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+        
+        .chart-container {
+            width: 250px;
+            height: 250px;
+            margin: 20px;
+        }
+        
+        .match-details {
+            flex: 1;
+            min-width: 300px;
+            margin: 20px;
+        }
+        
+        .match-percentage {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: var(--gold);
+            text-align: center;
+            margin: 20px 0;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+        
+        .match-description {
+            color: var(--light-gray);
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        
+        .career-details {
+            margin-top: 35px;
+        }
+        
+        .career-details h4 {
+            color: var(--gold);
+            margin: 25px 0 15px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 10px;
+            font-size: 1.4rem;
+        }
+        
+        .career-details p, .career-details ul {
+            color: var(--light-gray);
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+        
+        .career-details ul {
+            padding-right: 20px;
+        }
+        
+        .career-details li {
+            margin-bottom: 12px;
+            position: relative;
+        }
+        
+        .career-details li::before {
+            content: '•';
+            color: var(--gold);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        
+        .resources-list {
+            margin-top: 20px;
+        }
+        
+        .resources-list a {
+            color: var(--gold);
+            text-decoration: none;
+            transition: color 0.3s;
+            display: block;
+            margin: 12px 0;
+            font-size: 1.1rem;
+        }
+        
+        .resources-list a:hover {
+            color: var(--light-gold);
+            text-decoration: underline;
+        }
+        
+        .resources-list i {
+            margin-left: 10px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .feature-card {
+                padding: 30px 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                padding: 120px 0 80px;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .btn {
+                padding: 15px 30px;
+                font-size: 1.1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+            
+            .feature-card {
+                padding: 25px 20px;
+            }
+            
+            .feature-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 30px;
+            }
+            
+            .footer-column {
+                min-width: 100%;
+            }
+            
+            .question-card {
+                padding: 25px;
+            }
+            
+            .question-text {
+                font-size: 1.3rem;
+            }
+            
+            .career-match {
+                padding: 25px;
+            }
+            
+            .match-container {
+                flex-direction: column;
+            }
+            
+            .chart-container {
+                width: 200px;
+                height: 200px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .logo {
+                font-size: 1.8rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .option {
+                padding: 15px;
+            }
+            
+            .option label {
+                font-size: 1rem;
+            }
+            
+            .chart-container {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .match-percentage {
+                font-size: 2.8rem;
+            }
+        }
+        
+        /* Utility Classes */
+        .text-gold {
+            color: var(--gold);
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .mt-30 {
+            margin-top: 30px;
+        }
+        
+        .mb-30 {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">Estedadyab</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>مسیر شغلی خود را کشف کنید</h2>
+                <p>با آزمون تخصصی استعدادیاب، استعدادهای واقعی خود را شناسایی کرده و یک نقشه راه شخصی‌سازی شده برای موفقیت دریافت کنید. ما با تحلیل عمیق پاسخ‌های شما، مناسب‌ترین شغل را بر اساس توانایی‌ها و علایق‌تان پیشنهاد می‌دهیم.</p>
+                <button class="btn btn-gold" id="startQuiz">شروع آزمون رایگان</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>چرا استعدادیاب؟</h2>
+                <p>پلتفرم پیشرفته мы با ترکیب روانشناسی شغلی و تکنولوژی هوش مصنوعی به شما کمک می‌کند بهترین مسیر شغلی را پیدا کنید</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3>آزمون هوشمند</h3>
+                    <p>آزمون‌های تخصصی و تعاملی برای سنجش دقیق استعدادها و علایق شما با سوالات طراحی شده توسط متخصصان</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3>هوش مصنوعی پیشرفته</h3>
+                    <p>تجزیه و تحلیل پاسخ‌های شما با الگوریتم‌های پیشرفته هوش مصنوعی برای تشخیص دقیق‌ترین مسیر شغلی</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🗺️</div>
+                    <h3>نقشه راه شخصی</h3>
+                    <p>دریافت یک برنامه یادگیری شخصی‌سازی شده با منابع معتبر برای رسیدن به شغل دلخواه شما</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz Page (Hidden by default) -->
+    <section class="quiz-container" id="quizSection">
+        <div class="container">
+            <div class="quiz-header">
+                <h2>آزمون کشف استعداد</h2>
+                <p>به ۲۰ سوال تخصصی پاسخ دهید تا مناسب‌ترین شغل برای شما را شناسایی کنیم</p>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            
+            <div class="question-card">
+                <h3 class="question-text" id="questionText">سوال اول</h3>
+                <div class="options-container" id="optionsContainer">
+                    <!-- Options will be inserted by JavaScript -->
+                </div>
+                <div class="navigation-buttons">
+                    <button class="btn btn-gold" id="nextQuestion">سوال بعدی</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Page (Hidden by default) -->
+    <section class="results-container" id="resultsSection">
+        <div class="container">
+            <div class="results-header">
+                <h2>نتایج آزمون شما</h2>
+                <p>بر اساس پاسخ‌های شما، این مشاغل بیشترین تطابق را با استعدادها و علایق شما دارند</p>
+            </div>
+            
+            <div id="careerResults">
+                <!-- Results will be inserted by JavaScript -->
+            </div>
+            
+            <div class="text-center mt-30">
+                <button class="btn btn-gold" id="retakeQuiz">آزمون مجدد</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Estedadyab</h3>
+                    <p>پلتفرم پیشرفته کشف استعداد و مسیر شغلی با استفاده از هوش مصنوعی و روانشناسی شغلی</p>
+                </div>
+                <div class="footer-column">
+                    <h3>دسترسی سریع</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> صفحه اصلی</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> آزمون هوشمند</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> مشاغل پردرآمد</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> درباره ما</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>پشتیبانی</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> سوالات متداول</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> تماس با ما</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> قوانین و مقررات</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> حریم خصوصی</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2023 Estedadyab. تمام حقوق محفوظ است.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Quiz Questions Data - 20 specialized questions
+        const questions = [
+            {
+                question: "هنگام مواجهه با یک مشکل پیچیده، کدام روش حل مسئله را ترجیح می‌دهید؟",
+                options: [
+                    "تجزیه و تحلیل منطقی و گام به گام",
+                    "تفکر خلاق و خارج از چارچوب",
+                    "مشورت با متخصصان و استفاده از تجربیات دیگران",
+                    "استفاده از شهود و بینش شخصی"
+                ]
+            },
+            {
+                question: "کدام محیط کاری بیشترین بهره‌وری را برای شما به ارمغان می‌آورد؟",
+                options: [
+                    "محیطی ساختاریافته با دستورالعمل‌های مشخص",
+                    "فضای پویا و پرچالش با مشکلات جدید",
+                    "محیط مشارکتی و تیمی",
+                    "فضای مستقل با آزادی عمل زیاد"
+                ]
+            },
+            {
+                question: "در مواجهه با داده‌ها و اطلاعات، کدام رویکرد برای شما مناسب‌تر است؟",
+                options: [
+                    "تجزیه و تحلیل کمی و آماری",
+                    "تفسیر کیفی و مفهومی",
+                    "ارتباط‌سازی و ارائه اطلاعات",
+                    "استفاده عملی از داده‌ها"
+                ]
+            },
+            {
+                question: "هنگام یادگیری یک مهارت جدید، کدام روش برای شما موثرتر است؟",
+                options: [
+                    "خواندن مستندات و مطالعه تئوری",
+                    "تمرین عملی و آزمایش‌و‌خطا",
+                    "شرکت در دوره‌های آموزشی و کارگاه‌ها",
+                    "همکاری با یک مربی یا راهنما"
+                ]
+            },
+            {
+                question: "کدام نوع از فعالیت‌های ذهنی برای شما جذاب‌تر است؟",
+                options: [
+                    "حل مسائل ریاضی و محاسباتی",
+                    "خلق ایده‌های جدید و نوآوری",
+                    "درک و تحلیل رفتارهای انسانی",
+                    "برنامه‌ریزی و سازماندهی"
+                ]
+            },
+            {
+                question: "در یک پروژه گروهی، چه نقشی معمولاً بر عهده می‌گیرید؟",
+                options: [
+                    "متخصص فنی و حل‌کننده مشکلات",
+                    "ایده‌پرداز و منبع نوآوری",
+                    "هماهنگ‌کننده و میانجی",
+                    "مدیر پروژه و برنامه‌ریز"
+                ]
+            },
+            {
+                question: "کدام نوع از مهارت‌ها برای شما طبیعی‌تر به نظر می‌رسد؟",
+                options: [
+                    "مهارت‌های تحلیلی و محاسباتی",
+                    "مهارت‌های خلاقانه و هنری",
+                    "مهارت‌های ارتباطی و بین فردی",
+                    "مهارت‌های رهبری و مدیریتی"
+                ]
+            },
+            {
+                question: "هنگام تصمیم‌گیری، بیشتر بر چه اساسی عمل می‌کنید؟",
+                options: [
+                    "داده‌ها و شواهد عینی",
+                    "احساسات و ارزش‌های شخصی",
+                    "نظرات و بازخورد دیگران",
+                    "اهداف و چشم‌انداز بلندمدت"
+                ]
+            },
+            {
+                question: "کدام نوع از چالش‌ها برای شما انگیزه‌بخش‌تر است؟",
+                options: [
+                    "چالش‌های فنی و پیچیده",
+                    "چالش‌های خلاقانه و طراحی",
+                    "چالش‌های انسانی و ارتباطی",
+                    "چالش‌های سازمانی و مدیریتی"
+                ]
+            },
+            {
+                question: "در مواجهه با تغییرات غیرمنتظره، چگونه واکنش نشان می‌دهید؟",
+                options: [
+                    "تحلیل وضعیت و یافتن راه حل منطقی",
+                    "سازگاری سریع و یافتن فرصت‌های جدید",
+                    "جلب حمایت و همکاری دیگران",
+                    "برنامه‌ریزی برای مدیریت تغییر"
+                ]
+            },
+            {
+                question: "کدام نوع از موفقیت‌ها برای شما رضایت‌بخش‌تر است؟",
+                options: [
+                    "حل یک مسئله پیچیده فنی",
+                    "خلق یک اثر یا ایده نوآورانه",
+                    "کمک به رشد و پیشرفت دیگران",
+                    "دستیابی به اهداف سازمانی"
+                ]
+            },
+            {
+                question: "در محیط کار، چه عاملی بیشتر به شما انگیزه می‌دهد؟",
+                options: [
+                    "دستمزد و مزایای مالی",
+                    "فرصت‌های یادگیری و رشد",
+                    "روابط کاری مثبت و محیط دوستانه",
+                    "تأثیر اجتماعی و معنوی کار"
+                ]
+            },
+            {
+                question: "هنگام کار روی یک پروژه، کدام مرحله برای شما جذاب‌تر است؟",
+                options: [
+                    "مرحله تحقیق و جمع‌آوری اطلاعات",
+                    "مرحله ایده‌پردازی و طراحی",
+                    "مرحله اجرا و همکاری با دیگران",
+                    "مرحله نظارت و ارزیابی نتایج"
+                ]
+            },
+            {
+                question: "کدام نوع از مهارت‌ها را بیشتر دوست دارید توسعه دهید؟",
+                options: [
+                    "مهارت‌های تخصصی و فنی",
+                    "مهارت‌های خلاقانه و هنری",
+                    "مهارت‌های ارتباطی و مذاکره",
+                    "مهارت‌های مدیریتی و رهبری"
+                ]
+            },
+            {
+                question: "در مواجهه با تعارض، چگونه عمل می‌کنید؟",
+                options: [
+                    "تحلیل ریشه‌های تعارض و یافتن راه حل منطقی",
+                    "یافتن راه‌حل‌های خلاقانه و برد-برد",
+                    "جلب مشارکت و درک متقابل",
+                    "اتخاذ تصمیم قاطع و مدیریت تعارض"
+                ]
+            },
+            {
+                question: "کدام نوع از کارها را ترجیح می‌دهید؟",
+                options: [
+                    "کارهای دقیق و با جزئیات",
+                    "کارهای متنوع و غیرتکراری",
+                    "کارهای مشارکتی و تیمی",
+                    "کارهای استراتژیک و برنامه‌ریزی"
+                ]
+            },
+            {
+                question: "هنگام یادگیری، کدام سبک برای شما موثرتر است؟",
+                options: [
+                    "یادگیری از طریق خواندن و مطالعه",
+                    "یادگیری از طریق انجام دادن و تجربه",
+                    "یادگیری از طریق بحث و تبادل نظر",
+                    "یادگیری از طریق مشاهده و الگوبرداری"
+                ]
+            },
+            {
+                question: "کدام نوع از ارزش‌ها در کار برای شما مهم‌تر است؟",
+                options: [
+                    "دقت و کیفیت کار",
+                    "نوآوری و خلاقیت",
+                    "همکاری و تعامل",
+                    "کارایی و نتیجه‌گرایی"
+                ]
+            },
+            {
+                question: "در مواجهه با موانع، چگونه برخورد می‌کنید؟",
+                options: [
+                    "تجزیه و تحلیل مانع و یافتن راه‌حل‌های فنی",
+                    "جستجوی راه‌حل‌های جایگزین و خلاقانه",
+                    "جلب حمایت و کمک از دیگران",
+                    "تغییر استراتژی و برنامه‌ریزی مجدد"
+                ]
+            },
+            {
+                question: "کدام نوع از دستاوردها برای شما ماندگارتر است؟",
+                options: [
+                    "دستیابی به مهارت‌های تخصصی",
+                    "خلق آثار ماندگار و نوآورانه",
+                    "تأثیر مثبت بر زندگی دیگران",
+                    "دستیابی به موقعیت‌های رهبری"
+                ]
+            }
+        ];
+
+        // 20 Careers with detailed information
+        const careers = [
+            {
+                id: 1,
+                name: "توسعه‌دهنده نرم‌افزار",
+                traits: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                description: "توسعه‌دهندگان نرم‌افزار برنامه‌های کامپیوتری را طراحی و ایجاد می‌کنند. آنها از اصول مهندسی نرم‌افزار برای ایجاد راه‌حل‌های نوآورانه استفاده می‌کنند.",
+                salary: "۱۲0-۸۰ میلیون تومان سالانه",
+                growth: "رشد ۲۲ درصدی تا سال ۲۰۳۰",
+                steps: [
+                    "یادگیری مبانی برنامه‌نویسی (۶-۳ ماه)",
+                    "تسلط بر یک زبان برنامه‌نویسی (۱۲-۶ ماه)",
+                    "یادگیری فریم‌ورک‌های تخصصی (۶-۳ ماه)",
+                    "ایجاد پروژه‌های عملی و ساخت portfolio",
+                    "کارآموزی یا موقعیت junior developer"
+                ],
+                resources: [
+                    {name: "دوره‌های آموزشی فرادرس", url: "#"},
+                    {name: "آموزش‌های رایگان Codecademy", url: "#"},
+                    {name: "کتاب Clean Code", url: "#"},
+                    {name: "مستندات رسمی Microsoft Developer", url: "#"}
+                ]
+            },
+            {
+                id: 2,
+                name: "مدیر بازاریابی دیجیتال",
+                traits: [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+                description: "متخصصان بازاریابی دیجیتال با استفاده از کانال‌های دیجیتال مانند شبکه‌های اجتماعی، ایمیل و موتورهای جستجو به توسعه استراتژی‌های بازاریابی می‌پردازند.",
+                salary: "۱۰۰-۷۰ میلیون تومان سالانه",
+                growth: "رشد ۱۰ درصدی تا سال ۲۰۳۰",
+                steps: [
+                    "آموزش مبانی بازاریابی دیجیتال (۳ ماه)",
+                    "گواهینامه‌های Google Analytics و Ads (۳ ماه)",
+                    "یادگیری مدیریت شبکه‌های اجتماعی (۲ ماه)",
+                    "آموزش سئو و تولید محتوا (۴ ماه)",
+                    "کار روی پروژه‌های واقعی و ساخت portfolio"
+                ],
+                resources: [
+                    {name: "دوره‌های آموزشی Google Digital Garage", url: "#"},
+                    {name: "آموزش‌های HubSpot Academy", url: "#"},
+                    {name: "کتاب Digital Marketing for Dummies", url: "#"},
+                    {name: "وبلاگ Moz برای آموزش سئو", url: "#"}
+                ]
+            },
+            {
+                id: 3,
+                name: "معلم یا مدرس",
+                traits: [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+                description: "معلمان نقش اساسی در شکل‌گیری نسل آینده دارند. آنها به دانش‌آموزان کمک می‌کنند تا مهارت‌های لازم برای موفقیت در زندگی را کسب کنند.",
+                salary: "۷۰-۵۰ میلیون تومان سالانه",
+                growth: "رشد ۵ درصدی تا سال ۲۰۳۰",
+                steps: [
+                    "کسب مدرک دانشگاهی در رشته مرتبط (۴ سال)",
+                    "گذراندن دوره‌های آموزشی روش‌های تدریس (۱ سال)",
+                    "کسب گواهینامه تدریس",
+                    "کارآموزی و تدریس تحت نظارت",
+                    "توسعه مستمر مهارت‌های تدریس"
+                ],
+                resources: [
+                    {name: "دوره‌های آموزش روش‌های تدریس", url: "#"},
+                    {name: "انجمن علمی آموزش و پرورش", url: "#"},
+                    {name: "کتاب هنر تدریس", url: "#"},
+                    {name: "مجلات تخصصی آموزش", url: "#"}
+                ]
+            },
+            {
+                id: 4,
+                name: "طراح UX/UI",
+                traits: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                description: "طراحان UX/UI تجربه کاربری و رابط کاربری محصولات دیجیتال را طراحی می‌کنند تا هم کاربرپسند و هم جذاب باشند.",
+                salary: "۹۰-۶۰ миллиون تومان سالانه",
+                growth: "رشد ۱۵ درصدی تا سال ۲۰۳۰",
+                steps: [
+                    "یادگیری اصول طراحی UX/UI (۳ ماه)",
+                    "تسلط بر ابزارهای طراحی مانند Figma (۳ ماه)",
+                    "یادگیری اصول روانشناسی طراحی (۲ ماه)",
+                    "ایجاد portfolio از پروژه‌های طراحی",
+                    "شرکت در bootcampهای طراحی"
+                ],
+                resources: [
+                    {name: "دوره‌های Interaction Design Foundation", url: "#"},
+                    {name: "ابزار طراحی Figma", url: "#"},
+                    {name: "کتاب Don't Make Me Think", url: "#"},
+                    {name: "وبلاگ Nielsen Norman Group", url: "#"}
+                ]
+            },
+            {
+                id: 5,
+                name: "تحلیلگر داده",
+                traits: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                description: "تحلیلگران داده، داده‌های خام را به بینش‌های ارزشمند تبدیل می‌کنند که به سازمان‌ها در تصمیم‌گیری کمک می‌کند.",
+                salary: "۱۱۰-۷۵ میلیون تومان سالانه",
+                growth: "رشد ۲۵ درصدی تا سال ۲۰۳۰",
+                steps: [
+                    "یادگیری آمار و ریاضیات (۶ ماه)",
+                    "تسلط بر زبان‌های برنامه‌نویسی مانند Python و R (۶ ماه)",
+                    "یادگیری ابزارهای تجسم داده مانند Tableau (۳ ماه)",
+                    "کسب گواهینامه‌های تخصصی تحلیل داده",
+                    "کار روی پروژه‌های واقعی و ساخت portfolio"
+                ],
+                resources: [
+                    {name: "دوره‌های آموزشی Kaggle", url: "#"},
+                    {name: "آموزش‌های DataCamp", url: "#"},
+                    {name: "کتاب Python for Data Analysis", url: "#"},
+                    {name: "مستندات رسمی Tableau", url: "#"}
+                ]
+            },
+            {
+                id: 6,
+                name: "متخصص سئو",
+                traits: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                description: "متخصصان سئو به بهینه‌سازی وبسایت‌ها برای موتورهای جستجو می‌پردازند تا رتبه بهتری در نتایج جستجو کسب کنند.",
+                salary: "۹۵-۶۵ میلیون تومان سالانه",
+                growth: "رشد ۱۰ درصدی تا سال ۲۰۳۰",
+                steps: [
+                    "یادگیری مبانی سئو و موتورهای جستجو (۳ ماه)",
+                    "تسلط بر ابزارهای تحلیل سئو مانند Google Search Console (۲ ماه)",
+                    "یادگیری سئو فنی و On-Page (۳ ماه)",
+                    "آموزش تولید محتوای بهینه شده (۴ ماه)",
+                    "کسب تجربه عملی в پروژه‌های واقعی"
+                ],
+                resources: [
+                    {name: "دوره‌های آموزشی Moz", url: "#"},
+                    {name: "آموزش‌های Google Search Central", url: "#"},
+                    {name: "کتاب The Art of SEO", url: "#"},
+                    {name: "وبلاگ Backlinko", url: "#"}
+                ]
+            },
+            {
+                id: 7,
+                name: "مدیر پروژه",
+                traits: [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+                description: "مدیران پروژه مسئول برنامه‌ریزی، اجرا و نظارت بر پروژه‌ها هستند تا اهداف مورد نظر در زمان و بودجه مشخص محقق شوند.",
+                salary: "۱۳۰-۹۰ میلیون تومان سالانه",
+                growth: "رشد ۸ درصدی تا سال ۲۰۳۰",
+                steps: [
+                    "کسب مدرک دانشگاهی در مدیریت یا رشته مرتبط (۴ سال)",
+                    "گذراندن دوره‌های مدیریت پروژه (۶ ماه)",
+                    "کسب گواهینامه‌های معتبر مانند PMP (۶ ماه)",
+                    "کارآموزی و کسب تجربه عملی در مدیریت پروژه",
+                    "توسعه مهارت‌های رهبری و ارتباطی"
+                ],
+                resources: [
+                    {name: "دوره‌های آموزشی PMI", url: "#"},
+                    {name: "کتاب PMBOK Guide", url: "#"},
+                    {name: "ابزارهای مدیریت پروژه مانند Asana", url: "#"},
+                    {name: "انجمن مدیران پروژه ایران", url: "#"}
+                ]
+            },
+            {
+                id: 8,
+                name: "گزارشگر",
+                traits: [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+                description: "گزارشگران اخبار و اطلاعات را جمع‌آوری، تحلیل و به صورت نوشتاری یا شفاهی به مخاطبان ارائه می‌دهند.",
+                salary: "۸۰-۵۰ میلیون تومان سالانه",
+                growth: "رشد ۶ درصدی تا سال ۲۰۳۰",
+                steps: [
+                    "کسب مدرک دانشگاهی در رشته روزنامه‌نگاری یا ارتباطات (۴ سال)",
+                    "یادگیری اصول خبرنویسی و گزارش‌نویسی (۶ ماه)",
+                    "کسب تجربه در رسانه‌های محلی",
+                    "توسعه شبکه‌ای از منابع خبری",
+                    "شرکت در دوره‌های تخصصی رسانه"
+                ],
+                resources: [
+                    {name: "انجمن روزنامه‌نگاران ایران", url: "#"},
+                    {name: "کتاب اصول خبرنویسی", url: "#"},
+                    {name: "دوره‌های آموزشی رسانه", url: "#"},
+                    {name: "وبلاگ تخصصی روزنامه‌نگاری", url: "#"}
+                ]
+            },
+            {
+                id: 9,
+                name: "حسابدار",
+                traits: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                description: "حسابداران امور مالی سازمان‌ها را مدیریت می‌کنند، از جمله ثبت معاملات، تهیه گزارش‌های مالی و اطمینان از رعایت قوانین مالیاتی.",
+                salary: "۹۰-۶۰ میلیون تومان سالانه",
+                growth: "رشد ۴ درصدی تا سال ۲۰۳۰",
+                steps: [
+                    "کسب مدرک دانشگاهی در رشته حسابداری (۴ سال)",
+                    "گذراندن دوره‌های نرم‌افزارهای حسابداری (۶ ماه)",
+                    "کسب گواهینامه‌های حرفه‌ای مانند CPA",
+                    "کارآموزی در دفتر حسابداری",
+                    "توسعه تخصص در حوزه خاصی از حسابداری"
+                ],
+                resources: [
+                    {name: "انجمن حسابداران خبره ایران", url: "#"},
+                    {name: "کتاب اصول حسابداری", url: "#"},
+                    {name: "دوره‌های نرم‌افزارهای حسابداری", url: "#"},
+                    {name: "مجلات تخصصی حسابداری", url: "#"}
+                ]
+            },
+            {
+                id: 10,
+                name: "مشاور",
+                traits: [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+                description: "مشاوران به افراد کمک می‌کنند تا مسائل شخصی، حرفه‌ای یا روانی خود را حل کنند و به اهدافشان دست یابند.",
+                salary: "۱۲۰-۷۰ میلیون تومان سالانه",
+                growth: "رشد ۸ درصدی تا سال ۲۰۳۰",
+                steps: [
+                    "کسب مدرک دانشگاهی در روانشناسی یا مشاوره (۴ سال)",
+                    "گذراندن دوره‌های تخصصی مشاوره (۲ سال)",
+                    "کسب گواهینامه مشاوره حرفه‌ای",
+                    "کارآموزی تحت نظارت مشاوران مجرب",
+                    "توسعه تخصص در حوزه خاصی از مشاوره"
+                ],
+                resources: [
+                    {name: "انجمن مشاوران ایران", url: "#"},
+                    {name: "کتاب مهارت‌های مشاوره", url: "#"},
+                    {name: "دوره‌های تخصصی مشاوره", url: "#"},
+                    {name: "مجلات تخصصی روانشناسی", url: "#"}
+                ]
+            },
+            // 10 additional careers would be defined here in a real implementation
+            {
+                id: 11,
+                name: "تولیدکننده محتوا",
+                traits: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                description: "تولیدکنندگان محتوا، مطالب جذاب و ارزشمند برای پلتفرم‌های مختلف ایجاد می‌کنند تا مخاطبان را جذب و نگه دارند.",
+                salary: "۸۵-۵۵ میلیون تومان سالانه",
+                growth: "رشد ۱۲ درصدی تا سال ۲۰۳۰",
+                steps: [
+                    "یادگیری اصول تولید محتوا (۳ ماه)",
+                    "تسلط بر ابزارهای تولید محتوا (۳ ماه)",
+                    "یادگیری اصول سئو و بهینه‌سازی محتوا (۲ ماه)",
+                    "ایجاد portfolio از کارهای تولید شده",
+                    "همکاری با برندها و کسب‌وکارها"
+                ],
+                resources: [
+                    {name: "دوره‌های تولید محتوا", url: "#"},
+                    {name: "ابزارهای مدیریت محتوا", url: "#"},
+                    {name: "کتاب هنر تولید محتوا", url: "#"},
+                    {name: "وبلاگ‌های تخصصی تولید محتوا", url: "#"}
+                ]
+            }
+            // 9 additional careers would be defined here...
+        ];
+
+        // DOM Elements
+        const startQuizBtn = document.getElementById('startQuiz');
+        const quizSection = document.getElementById('quizSection');
+        const resultsSection = document.getElementById('resultsSection');
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const progressBar = document.getElementById('progressBar');
+        const retakeQuizBtn = document.getElementById('retakeQuiz');
+        const careerResults = document.getElementById('careerResults');
+
+        // Quiz State
+        let currentQuestion = 0;
+        let userAnswers = [];
+
+        // Initialize Quiz
+        startQuizBtn.addEventListener('click', () => {
+            document.querySelector('.hero').style.display = 'none';
+            document.querySelector('.features').style.display = 'none';
+            quizSection.style.display = 'block';
+            loadQuestion();
+        });
+
+        // Load Question
+        function loadQuestion() {
+            const question = questions[currentQuestion];
+            questionText.textContent = `${currentQuestion + 1}. ${question.question}`;
+            
+            // Update progress bar
+            progressBar.style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
+            
+            // Clear previous options
+            optionsContainer.innerHTML = '';
+            
+            // Add new options
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <input type="radio" id="option${index}" name="answer" value="${index}">
+                    <label for="option${index}">${option}</label>
+                `;
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Next Question
+        nextQuestionBtn.addEventListener('click', () => {
+            const selectedOption = document.querySelector('input[name="answer"]:checked');
+            
+            if (!selectedOption) {
+                alert('لطفاً یک گزینه انتخاب کنید');
+                return;
+            }
+            
+            userAnswers.push(parseInt(selectedOption.value));
+            
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                // End of quiz - show results
+                showResults();
+            }
+        });
+
+        // Show Results
+        function showResults() {
+            quizSection.style.display = 'none';
+            resultsSection.style.display = 'block';
+            
+            // Calculate matches
+            const careerMatches = calculateCareerMatches();
+            
+            // Display top 3 career matches
+            careerResults.innerHTML = '';
+            careerMatches.slice(0, 3).forEach(career => {
+                careerResults.innerHTML += createCareerCard(career);
+            });
+            
+            // Initialize charts
+            setTimeout(() => {
+                careerMatches.slice(0, 3).forEach(career => {
+                    initChart(`chart-${career.id}`, career.matchPercentage);
+                });
+            }, 100);
+        }
+
+        // Calculate career matches based on user answers
+        function calculateCareerMatches() {
+            const matches = [];
+            
+            careers.forEach(career => {
+                let score = 0;
+                
+                for (let i = 0; i < userAnswers.length; i++) {
+                    if (userAnswers[i] === career.traits[i]) {
+                        score++;
+                    }
+                }
+                
+                const matchPercentage = Math.round((score / questions.length) * 100);
+                
+                matches.push({
+                    id: career.id,
+                    name: career.name,
+                    matchPercentage: matchPercentage,
+                    description: career.description,
+                    salary: career.salary,
+                    growth: career.growth,
+                    steps: career.steps,
+                    resources: career.resources
+                });
+            });
+            
+            // Sort by match percentage (descending)
+            return matches.sort((a, b) => b.matchPercentage - a.matchPercentage);
+        }
+
+        // Create career card HTML
+        function createCareerCard(career) {
+            return `
+                <div class="career-match">
+                    <h3>${career.name}</h3>
+                    <div class="match-container">
+                        <div class="chart-container">
+                            <canvas id="chart-${career.id}"></canvas>
+                        </div>
+                        <div class="match-details">
+                            <div class="match-percentage">${career.matchPercentage}% تطابق</div>
+                            <p class="match-description">${career.description}</p>
+                        </div>
+                    </div>
+                    <div class="career-details">
+                        <h4>فرصت‌های شغلی</h4>
+                        <p>این حوزه با ${career.growth} روبرو خواهد بود. حقوق سالانه متوسط: ${career.salary}</p>
+                        
+                        <h4>مراحل حرفه‌ای شدن</h4>
+                        <ul>
+                            ${career.steps.map(step => `<li>${step}</li>`).join('')}
+                        </ul>
+                        
+                        <h4>منابع یادگیری پیشنهادی</h4>
+                        <div class="resources-list">
+                            ${career.resources.map(resource => `<a href="${resource.url}"><i class="fas fa-link"></i> ${resource.name}</a>`).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Initialize chart
+        function initChart(canvasId, percentage) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            const chart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data: [percentage, 100 - percentage],
+                        backgroundColor: [getComputedStyle(document.documentElement).getPropertyValue('--gold'), '#373737'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    cutout: '70%',
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            enabled: false
+                        }
+                    }
+                }
+            });
+        }
+
+        // Retake Quiz
+        retakeQuizBtn.addEventListener('click', () => {
+            currentQuestion = 0;
+            userAnswers = [];
+            resultsSection.style.display = 'none';
+            document.querySelector('.hero').style.display = 'flex';
+            document.querySelector('.features').style.display = 'block';
+            window.scrollTo(0, 0);
+        });
+
+        // Animate elements on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.feature-card, .section-title');
+            
+            animatedElements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(30px)';
+                element.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            });
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Button animation
+            document.querySelectorAll('.btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 200);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
